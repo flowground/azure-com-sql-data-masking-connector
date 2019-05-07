@@ -1,0 +1,114 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "serverName": {
+            "required": true,
+            "type": "string"
+        },
+        "databaseName": {
+            "required": true,
+            "type": "string"
+        },
+        "dataMaskingPolicyName": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "Default"
+            ]
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "ARM resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource ID.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "x-ms-azure-resource": true
+                        }
+                    ],
+                    "description": "ARM proxy resource.",
+                    "properties": {},
+                    "type": "object"
+                }
+            ],
+            "description": "Represents a database data masking policy.",
+            "properties": {
+                "kind": {
+                    "description": "The kind of data masking policy. Metadata, used for Azure portal.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the data masking policy.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "The properties of the data masking policy.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "applicationPrincipals": {
+                            "description": "The list of the application principals. This is a legacy parameter and is no longer used.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "dataMaskingState": {
+                            "description": "The state of the data masking policy.",
+                            "enum": [
+                                "Disabled",
+                                "Enabled"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "DataMaskingState"
+                            }
+                        },
+                        "exemptPrincipals": {
+                            "description": "The list of the exempt principals. Specifies the semicolon-separated list of database users for which the data masking policy does not apply. The specified users receive data results without masking for all of the database queries.",
+                            "type": "string"
+                        },
+                        "maskingLevel": {
+                            "description": "The masking level. This is a legacy parameter and is no longer used.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "dataMaskingState"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
